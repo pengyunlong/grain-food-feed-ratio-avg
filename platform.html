@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>新平台选取与总粮食消费量 · 2024–2035</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg:#0f1419; --card:#1a2332; --text:#e7ecf3; --muted:#8b9bb4;
+    --food:#5b9fd4; --feed:#3d9a6a; --mid:#e07a9b; --high:#d4a017; --low:#8b7ec8; --line:#2a3548;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(1200px 600px at 10% -10%,#1c2a3f 0%,var(--bg) 55%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1100px;margin:0 auto;padding:32px 20px 64px}
+  h1{margin:0 0 8px;font-size:1.55rem;font-weight:650}
+  h2{margin:0 0 12px;font-size:1.05rem}
+  h3{margin:0 0 8px;font-size:.95rem;color:#9ec5e8}
+  .sub{color:var(--muted);line-height:1.65;font-size:.95rem;margin:0}
+  .badge{display:inline-block;margin-top:14px;padding:4px 10px;border-radius:999px;background:#243247;color:#9ec5e8;font-size:.8rem}
+  .nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+  .nav a{text-decoration:none;color:#8b9bb4;background:#243247;padding:7px 12px;border-radius:999px;font-size:.85rem;border:1px solid #2a3548}
+  .nav a.active,.nav a:hover{color:#9ec5e8;border-color:#5b9fd4}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+  .card{background:#152033;border:1px solid var(--line);border-radius:12px;padding:14px}
+  .label{color:var(--muted);font-size:.78rem;margin-bottom:6px}
+  .value{font-size:1.35rem;font-weight:700}
+  .hint{color:var(--muted);font-size:.75rem;margin-top:4px;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mini{background:#121a26;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .mini p,.mini li{margin:0;color:var(--muted);font-size:.84rem;line-height:1.65}
+  .mini ul{margin:0;padding-left:1.1em}
+  table{width:100%;border-collapse:collapse;font-size:.86rem}
+  th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--muted);font-weight:560}
+  td.hl{color:#f0a8be;font-weight:600}
+  .fig{margin-top:12px;background:#101821;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+  .fig img{width:100%;height:auto;display:block}
+  .figcapt{color:var(--muted);font-size:.78rem;padding:8px 10px}
+  .chart-box{position:relative;height:340px;margin-top:8px}
+  .note,.source{margin-top:12px;color:var(--muted);font-size:.82rem;line-height:1.7}
+  .source{border-top:1px solid var(--line);padding-top:12px}
+  .source strong{color:#c5d0e0}
+  footer{margin-top:24px;color:var(--muted);font-size:.78rem}
+  @media(max-width:900px){.kpi{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.chart-box{height:280px}}
+  @media(max-width:560px){.kpi{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>新平台选取与总粮食消费量</h1>
+    <p class="sub">新前沿地区双平台情景 · 在家口粮 / 饲料粮选取，以及含外出还原后的全国总粮食消费量（2024—2035）</p>
+    <span class="badge">平台调整 · 新前沿双平台</span>
+    <nav class="nav">
+      <a href="index.html">口粮·饲料粮合计占比</a>
+      <a href="cluster.html">省级经济聚类地图</a>
+      <a href="platform.html" class="active">新平台与总消费量</a>
+    </nav>
+  </header>
+
+  <div class="panel">
+    <h2>一、新平台选取</h2>
+    <p class="note" style="margin-top:0">前沿样本取省级经济聚类<strong style="color:#c5d0e0">第 1 类</strong>五地区：北京、上海、江苏、浙江、广东（旧六地区方案中的福建不在新样本中）。</p>
+    <div class="kpi">
+      <div class="card">
+        <div class="label">口粮平台值</div>
+        <div class="value" style="color:var(--food)">109.10</div>
+        <div class="hint">kg/人 · 五地区 2024 年观测均值</div>
+      </div>
+      <div class="card">
+        <div class="label">口粮平台区间</div>
+        <div class="value" style="color:var(--food);font-size:1.1rem">103.65—114.56</div>
+        <div class="hint">均值 ±5%</div>
+      </div>
+      <div class="card">
+        <div class="label">饲料粮平台值</div>
+        <div class="value" style="color:var(--feed)">190.20</div>
+        <div class="hint">kg/人 · 四地区五年最高值均值</div>
+      </div>
+      <div class="card">
+        <div class="label">饲料粮平台区间</div>
+        <div class="value" style="color:var(--feed);font-size:1.1rem">180.69—199.70</div>
+        <div class="hint">均值 ±5%</div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="mini">
+        <h3>口粮取值</h3>
+        <p>五地区各取 <strong style="color:#c5d0e0">2024 年</strong>口粮观测值，再算术平均。</p>
+        <ul>
+          <li>上海 93.6 · 北京 86.3 · 广东 105.8</li>
+          <li>江苏 131.3 · 浙江 128.5 → 均值 <strong style="color:#c5d0e0">109.1000</strong></li>
+        </ul>
+      </div>
+      <div class="mini">
+        <h3>饲料粮取值</h3>
+        <p>各地区取 2020—2024 年最高值；若最高值落在 <strong style="color:#c5d0e0">2024 年则整区排除</strong>（浙江排除）。纳入：北京、上海、江苏、广东。</p>
+        <ul>
+          <li>上海 175.53（2021）· 北京 142.19（2021）</li>
+          <li>广东 237.88（2023）· 江苏 205.18（2023）→ 均值 <strong style="color:#c5d0e0">190.1950</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="mini">
+        <h3>平台触发与 2050 调整值</h3>
+        <p>口粮：粮食平台 2027 · 经济平台 2037 · 首次平台化 2041 · 2050 调整值 104.89 kg/人</p>
+        <p style="margin-top:8px">饲料粮：粮食平台 2025 · 经济平台 2035 · 首次平台化 2041 · 2050 调整值 198.29 kg/人</p>
+      </div>
+      <div class="mini">
+        <h3>区间规则</h3>
+        <p>平台值 = 纳入地区对应值均值；下限 = ×95%，上限 = ×105%。区间为软约束，单年调整值可能暂时越过边界。第二平台用收入加消费支出经济指标到达年份。</p>
+      </div>
+    </div>
+    <div class="fig" style="margin-top:14px">
+      <img src="assets/food-platform.png" alt="口粮双平台调整折线图" />
+      <div class="figcapt">口粮：历史观测 + 新前沿双平台调整预测</div>
+    </div>
+    <div class="fig">
+      <img src="assets/feed-platform.png" alt="饲料粮双平台调整折线图" />
+      <div class="figcapt">饲料粮（折算）：历史观测 + 新前沿双平台调整预测</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>二、总粮食消费量预测（2024—2035）</h2>
+    <p class="note" style="margin-top:0">在家口粮 / 饲料粮按全国外出占比还原含外出量，再除以三法等权平均合计占比得到人均总粮食；× 全国人口 → 全国总量（万吨）。2024 为历史观测，2025—2035 为新平台预测。</p>
+    <div class="kpi">
+      <div class="card">
+        <div class="label">2035 · 总粮食·中</div>
+        <div class="value" style="color:var(--mid)" id="k-mid">—</div>
+        <div class="hint">万吨 · 中人口方案</div>
+      </div>
+      <div class="card">
+        <div class="label">2035 · 总粮食·高</div>
+        <div class="value" style="color:var(--high)" id="k-high">—</div>
+        <div class="hint">万吨 · 高人口方案</div>
+      </div>
+      <div class="card">
+        <div class="label">2035 · 总粮食·低</div>
+        <div class="value" style="color:var(--low)" id="k-low">—</div>
+        <div class="hint">万吨 · 低人口方案</div>
+      </div>
+      <div class="card">
+        <div class="label">2035 · 人均总粮食</div>
+        <div class="value" style="color:var(--food)" id="k-pc">—</div>
+        <div class="hint">kg/人（三方案人均相同）</div>
+      </div>
+    </div>
+    <div class="chart-box"><canvas id="chart"></canvas></div>
+    <div style="overflow-x:auto;margin-top:14px">
+      <table>
+        <thead>
+          <tr>
+            <th>年份</th>
+            <th>在家口粮</th>
+            <th>在家饲料</th>
+            <th>含外出口粮</th>
+            <th>含外出饲料</th>
+            <th>人均总粮食</th>
+            <th>总量·中</th>
+            <th>总量·高</th>
+            <th>总量·低</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p class="note">人均单位 kg/人；总量单位万吨。2024、2025 年三方案人口相同，故三列总量相同。2026—2035 分中 / 高 / 低人口方案。</p>
+  </div>
+  <footer>生成于 2026-09-30 · 博士进展汇报前端展示</footer>
+</div>
+<script>
+const ROWS = [
+  {y:2024, homeF:124.40, homeD:172.66, outF:145.57, outD:233.07, pc:506.19, mid:71285.47, high:71285.47, low:71285.47},
+  {y:2025, homeF:122.48, homeD:175.78, outF:143.74, outD:239.94, pc:513.19, mid:72152.18, high:72152.18, low:72152.18},
+  {y:2026, homeF:119.20, homeD:180.04, outF:140.30, outD:248.50, pc:520.20, mid:73016.69, high:73026.58, low:72991.21},
+  {y:2027, homeF:115.51, homeD:184.42, outF:136.34, outD:256.35, pc:525.49, mid:73661.51, high:73691.47, low:73585.84},
+  {y:2028, homeF:112.15, homeD:188.96, outF:132.77, outD:264.46, pc:531.57, mid:74382.84, high:74441.84, low:74232.94},
+  {y:2029, homeF:109.41, homeD:193.83, outF:129.89, outD:273.19, pc:539.30, mid:75301.52, high:75399.68, low:75052.37},
+  {y:2030, homeF:106.97, homeD:198.49, outF:127.36, outD:281.75, pc:547.21, mid:76212.17, high:76359.37, low:75838.43},
+  {y:2031, homeF:104.66, homeD:203.25, outF:124.97, outD:290.52, pc:555.53, mid:77147.70, high:77354.36, low:76623.28},
+  {y:2032, homeF:102.41, homeD:207.03, outF:122.63, outD:298.01, pc:562.23, mid:77827.06, high:78103.68, low:77125.40},
+  {y:2033, homeF:100.72, homeD:210.38, outF:120.94, outD:304.98, pc:569.04, mid:78494.15, high:78842.40, low:77610.43},
+  {y:2034, homeF:99.76, homeD:213.42, outF:120.14, outD:311.61, pc:576.42, mid:79213.33, high:79635.85, low:78141.18},
+  {y:2035, homeF:99.05, homeD:210.42, outF:119.61, outD:309.44, pc:572.25, mid:78323.69, high:78813.54, low:77081.33}
+];
+const last = ROWS[ROWS.length-1];
+const fmt = (n,d=2) => n.toLocaleString('zh-CN',{minimumFractionDigits:d,maximumFractionDigits:d});
+document.getElementById('k-mid').textContent = fmt(last.mid,0);
+document.getElementById('k-high').textContent = fmt(last.high,0);
+document.getElementById('k-low').textContent = fmt(last.low,0);
+document.getElementById('k-pc').textContent = fmt(last.pc,2);
+const tb = document.getElementById('tbody');
+ROWS.forEach(r => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td>${r.y}</td><td>${fmt(r.homeF)}</td><td>${fmt(r.homeD)}</td><td>${fmt(r.outF)}</td><td>${fmt(r.outD)}</td><td>${fmt(r.pc)}</td><td class="hl">${fmt(r.mid)}</td><td>${fmt(r.high)}</td><td>${fmt(r.low)}</td>`;
+  tb.appendChild(tr);
+});
+new Chart(document.getElementById('chart'), {
+  type: 'line',
+  data: {
+    labels: ROWS.map(r => r.y),
+    datasets: [
+      { label: '总粮食·中（万吨）', data: ROWS.map(r => r.mid), borderColor: '#e07a9b', borderWidth: 3, tension: .25, fill: false, pointRadius: 3 },
+      { label: '总粮食·高（万吨）', data: ROWS.map(r => r.high), borderColor: '#d4a017', tension: .25, fill: false, pointRadius: 2 },
+      { label: '总粮食·低（万吨）', data: ROWS.map(r => r.low), borderColor: '#8b7ec8', tension: .25, fill: false, pointRadius: 2 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#c5d0e0' } }, tooltip: { mode: 'index', intersect: false } },
+    scales: {
+      x: { ticks: { color: '#8b9bb4' }, grid: { color: 'rgba(255,255,255,.04)' } },
+      y: { ticks: { color: '#8b9bb4' }, grid: { color: 'rgba(255,255,255,.06)' }, title: { display: true, text: '万吨', color: '#8b9bb4' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
