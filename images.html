@@ -4,156 +4,185 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>图片整理汇报 · 第三、四章彩图与灰度对照</title>
-<style>
-  :root {
-    --bg:#0f1419; --card:#1a2332; --text:#e7ecf3; --muted:#8b9bb4; --line:#2a3548;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(1200px 600px at 10% -10%,#1c2a3f 0%,var(--bg) 55%);color:var(--text);min-height:100vh}
-  .wrap{max-width:1100px;margin:0 auto;padding:32px 20px 64px}
-  h1{margin:0 0 8px;font-size:1.55rem;font-weight:650}
-  .sub{color:var(--muted);line-height:1.65;font-size:.95rem;margin:0}
-  .badge{display:inline-block;margin-top:14px;padding:4px 10px;border-radius:999px;background:#243247;color:#9ec5e8;font-size:.8rem}
-  .nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
-  .nav a{text-decoration:none;color:#8b9bb4;background:#243247;padding:7px 12px;border-radius:999px;font-size:.85rem;border:1px solid #2a3548}
-  .nav a.active,.nav a:hover{color:#9ec5e8;border-color:#5b9fd4}
-  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 14px}
-  .label{color:var(--muted);font-size:.8rem;margin-bottom:6px}
-  .value{font-size:1.45rem;font-weight:700}
-  .hint{color:var(--muted);font-size:.75rem;margin-top:4px}
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
-  .panel h2{margin:0 0 10px;font-size:1.05rem}
-  .note{color:var(--muted);font-size:.85rem;line-height:1.65;margin:0 0 14px}
-  .pair{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-  .pair:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
-  .pair-title{font-weight:600;margin-bottom:10px}
-  .pair-title span{color:var(--muted);font-weight:500;font-size:.88rem}
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  figure{margin:0;background:#101821;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
-  figure img{width:100%;height:auto;display:block;background:#0a0f14}
-  figcaption{padding:8px 10px;color:var(--muted);font-size:.78rem}
-  footer{margin-top:24px;color:var(--muted);font-size:.78rem}
-  @media(max-width:800px){.kpi{grid-template-columns:1fr}.cols{grid-template-columns:1fr}}
-</style>
+<link rel="stylesheet" href="assets/shared.css" />
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>图片整理汇报</h1>
-    <p class="sub">第三、四章图件已完成 JPG 彩色版与灰度版一一对应整理；下表为抽检对照样例。</p>
-    <span class="badge">图片整理 · 已完成</span>
-    <nav class="nav">
-      <a href="index.html">口粮·饲料粮合计占比</a>
-      <a href="cluster.html">省级经济聚类地图</a>
-      <a href="platform.html">新平台与总消费量</a>
-      <a href="images.html" class="active">图片整理</a>
-    <a href="database.html">数据库系统建设</a>
-    </nav>
-  </header>
+<div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">粮</span>
+          <div>
+            <h1>全国粮食需求</h1>
+            <p>进展汇报</p>
+          </div>
+        </div>
+        <nav class="side-nav" aria-label="页面导航">
+          <a href="index.html">
+            <span class="nav-index">01</span>
+            <span class="nav-icon">比</span>
+            <span class="nav-copy"><strong>口粮·饲料粮占比</strong><small>三法合计占比</small></span>
+          </a>
+          <a href="cluster.html">
+            <span class="nav-index">02</span>
+            <span class="nav-icon">图</span>
+            <span class="nav-copy"><strong>省级经济聚类</strong><small>着色地图结果</small></span>
+          </a>
+          <a href="platform.html">
+            <span class="nav-index">03</span>
+            <span class="nav-icon">平</span>
+            <span class="nav-copy"><strong>新平台与总量</strong><small>双平台与总消费</small></span>
+          </a>
+          <a href="images.html" class="active" aria-current="page">
+            <span class="nav-index">04</span>
+            <span class="nav-icon">影</span>
+            <span class="nav-copy"><strong>图片整理</strong><small>彩图与灰度对照</small></span>
+          </a>
+          <a href="database.html">
+            <span class="nav-index">05</span>
+            <span class="nav-icon">库</span>
+            <span class="nav-copy"><strong>数据库系统</strong><small>登录与用户管理</small></span>
+          </a>
+        </nav>
+        <button class="theme-toggle" type="button" id="themeToggle" aria-label="切换主题">
+          <span id="themeIcon">☾</span>
+          <span id="themeLabel">深色模式</span>
+        </button>
+      </aside>
+  <main class="content">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">图片整理 · 已完成</p>
+        <h2>图片整理汇报</h2>
+        <p class="sub">第三、四章图件已完成 JPG 彩色版与灰度版一一对应整理；下表为抽检对照样例。</p>
+      </div>
+    </header>
 
-  <div class="kpi">
-    <div class="card">
-      <div class="label">彩色 JPG</div>
-      <div class="value" style="color:#5b9fd4">53</div>
-      <div class="hint">第三章第四章_JPG</div>
+    <div class="kpi cols-3">
+      <div class="card">
+        <div class="label">彩色 JPG</div>
+        <div class="value" style="color:var(--mlp)">53</div>
+        <div class="hint">第三章第四章_JPG</div>
+      </div>
+      <div class="card">
+        <div class="label">灰度 JPG</div>
+        <div class="value" style="color:var(--muted)">53</div>
+        <div class="hint">第三章第四章_JPG_灰度</div>
+      </div>
+      <div class="card">
+        <div class="label">对应关系</div>
+        <div class="value" style="color:var(--ok)">1 : 1</div>
+        <div class="hint">文件名一一对应</div>
+      </div>
     </div>
-    <div class="card">
-      <div class="label">灰度 JPG</div>
-      <div class="value" style="color:#8b9bb4">53</div>
-      <div class="hint">第三章第四章_JPG_灰度</div>
-    </div>
-    <div class="card">
-      <div class="label">对应关系</div>
-      <div class="value" style="color:#3d9a6a">1 : 1</div>
-      <div class="hint">文件名一一对应</div>
-    </div>
-  </div>
 
-  <div class="panel">
-    <h2>抽检对照（彩图 | 灰度）</h2>
-    <p class="note">从第三、四章各抽 3 张同名文件并排展示，说明彩色导出与灰度转换均已完成。完整图库共 53 对，路径：`/mnt/hgfs/博士/图片整理/`。</p>
-    
-    <div class="pair">
-      <div class="pair-title">图3-2 <span>· 第三章</span></div>
-      <div class="cols">
-        <figure>
-          <img src="assets/figs/fig3-2-color.jpg" alt="图3-2 彩色版" loading="lazy" />
-          <figcaption>彩色 JPG</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/figs/fig3-2-gray.jpg" alt="图3-2 灰度版" loading="lazy" />
-          <figcaption>灰度 JPG</figcaption>
-        </figure>
+    <div class="panel">
+      <h2>抽检对照（彩图 | 灰度）</h2>
+      <p class="note">从第三、四章各抽 3 张同名文件并排展示，说明彩色导出与灰度转换均已完成。完整图库共 53 对，路径：`/mnt/hgfs/博士/图片整理/`。</p>
+      
+      <div class="pair">
+        <div class="pair-title">图3-2 <span>· 第三章</span></div>
+        <div class="cols">
+          <figure>
+            <img src="assets/figs/fig3-2-color.jpg" alt="图3-2 彩色版" loading="lazy" />
+            <figcaption>彩色 JPG</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figs/fig3-2-gray.jpg" alt="图3-2 灰度版" loading="lazy" />
+            <figcaption>灰度 JPG</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="pair">
+        <div class="pair-title">图3-6 <span>· 第三章</span></div>
+        <div class="cols">
+          <figure>
+            <img src="assets/figs/fig3-6-color.jpg" alt="图3-6 彩色版" loading="lazy" />
+            <figcaption>彩色 JPG</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figs/fig3-6-gray.jpg" alt="图3-6 灰度版" loading="lazy" />
+            <figcaption>灰度 JPG</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="pair">
+        <div class="pair-title">图3-15 <span>· 第三章</span></div>
+        <div class="cols">
+          <figure>
+            <img src="assets/figs/fig3-15-color.jpg" alt="图3-15 彩色版" loading="lazy" />
+            <figcaption>彩色 JPG</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figs/fig3-15-gray.jpg" alt="图3-15 灰度版" loading="lazy" />
+            <figcaption>灰度 JPG</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="pair">
+        <div class="pair-title">图4-10 <span>· 第四章</span></div>
+        <div class="cols">
+          <figure>
+            <img src="assets/figs/fig4-10-color.jpg" alt="图4-10 彩色版" loading="lazy" />
+            <figcaption>彩色 JPG</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figs/fig4-10-gray.jpg" alt="图4-10 灰度版" loading="lazy" />
+            <figcaption>灰度 JPG</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="pair">
+        <div class="pair-title">图4-16 <span>· 第四章</span></div>
+        <div class="cols">
+          <figure>
+            <img src="assets/figs/fig4-16-color.jpg" alt="图4-16 彩色版" loading="lazy" />
+            <figcaption>彩色 JPG</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figs/fig4-16-gray.jpg" alt="图4-16 灰度版" loading="lazy" />
+            <figcaption>灰度 JPG</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="pair">
+        <div class="pair-title">图4-31 <span>· 第四章</span></div>
+        <div class="cols">
+          <figure>
+            <img src="assets/figs/fig4-31-color.jpg" alt="图4-31 彩色版" loading="lazy" />
+            <figcaption>彩色 JPG</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figs/fig4-31-gray.jpg" alt="图4-31 灰度版" loading="lazy" />
+            <figcaption>灰度 JPG</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
-    <div class="pair">
-      <div class="pair-title">图3-6 <span>· 第三章</span></div>
-      <div class="cols">
-        <figure>
-          <img src="assets/figs/fig3-6-color.jpg" alt="图3-6 彩色版" loading="lazy" />
-          <figcaption>彩色 JPG</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/figs/fig3-6-gray.jpg" alt="图3-6 灰度版" loading="lazy" />
-          <figcaption>灰度 JPG</figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="pair">
-      <div class="pair-title">图3-15 <span>· 第三章</span></div>
-      <div class="cols">
-        <figure>
-          <img src="assets/figs/fig3-15-color.jpg" alt="图3-15 彩色版" loading="lazy" />
-          <figcaption>彩色 JPG</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/figs/fig3-15-gray.jpg" alt="图3-15 灰度版" loading="lazy" />
-          <figcaption>灰度 JPG</figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="pair">
-      <div class="pair-title">图4-10 <span>· 第四章</span></div>
-      <div class="cols">
-        <figure>
-          <img src="assets/figs/fig4-10-color.jpg" alt="图4-10 彩色版" loading="lazy" />
-          <figcaption>彩色 JPG</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/figs/fig4-10-gray.jpg" alt="图4-10 灰度版" loading="lazy" />
-          <figcaption>灰度 JPG</figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="pair">
-      <div class="pair-title">图4-16 <span>· 第四章</span></div>
-      <div class="cols">
-        <figure>
-          <img src="assets/figs/fig4-16-color.jpg" alt="图4-16 彩色版" loading="lazy" />
-          <figcaption>彩色 JPG</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/figs/fig4-16-gray.jpg" alt="图4-16 灰度版" loading="lazy" />
-          <figcaption>灰度 JPG</figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="pair">
-      <div class="pair-title">图4-31 <span>· 第四章</span></div>
-      <div class="cols">
-        <figure>
-          <img src="assets/figs/fig4-31-color.jpg" alt="图4-31 彩色版" loading="lazy" />
-          <figcaption>彩色 JPG</figcaption>
-        </figure>
-        <figure>
-          <img src="assets/figs/fig4-31-gray.jpg" alt="图4-31 灰度版" loading="lazy" />
-          <figcaption>灰度 JPG</figcaption>
-        </figure>
-      </div>
-    </div>
-  </div>
-  <footer>生成于 2026-09-30 · 博士进展汇报前端展示</footer>
+    <footer>生成于 2026-09-30 · 博士进展汇报前端展示</footer>
+  </main>
 </div>
+
+<script>
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+  const label = document.getElementById('themeLabel');
+  const KEY = 'grain-report-theme';
+  function apply(theme) {
+    root.dataset.theme = theme;
+    const dark = theme === 'dark';
+    if (icon) icon.textContent = dark ? '☀' : '☾';
+    if (label) label.textContent = dark ? '浅色模式' : '深色模式';
+    try { localStorage.setItem(KEY, theme); } catch (e) {}
+  }
+  let theme = 'light';
+  try { theme = localStorage.getItem(KEY) || 'light'; } catch (e) {}
+  apply(theme);
+  if (btn) btn.addEventListener('click', function () {
+    apply(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
 </body>
 </html>
