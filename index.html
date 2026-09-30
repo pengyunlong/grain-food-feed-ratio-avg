@@ -40,6 +40,10 @@
   @media(max-width:900px){.kpi{grid-template-columns:1fr 1fr}.chart-box{height:300px}}
   @media(max-width:560px){.kpi{grid-template-columns:1fr}}
 
+  .outlook-share .row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 4px}
+  .outlook-share .card .value{font-size:1.35rem}
+  .outlook-share a{color:#8eb8e8}
+  @media(max-width:700px){.outlook-share .row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -77,6 +81,47 @@
     </div>
   </div>
 
+
+
+  <div class="panel outlook-share">
+    <h2>《中国农业展望报告（2026—2035）》· 口粮 / 饲料粮占比</h2>
+    <p class="note" style="margin-top:0">口径：报告「粮食」含大豆。下表仅摘食用（口粮）、饲用占总粮食消费比例；工业及其他未列。</p>
+    <div class="row">
+      <div class="card">
+        <div class="label">2025 · 食用占比</div>
+        <div class="value" style="color:#5b9fd4">33.0%</div>
+        <div class="hint">约 2.75 亿吨 / 总消费 8.32 亿吨</div>
+      </div>
+      <div class="card">
+        <div class="label">2025 · 饲用占比</div>
+        <div class="value" style="color:#3d9a6a">46.3%</div>
+        <div class="hint">约 3.85 亿吨 · 第一大用途</div>
+      </div>
+      <div class="card">
+        <div class="label">2025 · 口粮+饲料合计</div>
+        <div class="value" style="color:#e07a9b">79.3%</div>
+        <div class="hint">33.0% + 46.3%</div>
+      </div>
+    </div>
+    <div style="overflow-x:auto;margin-top:10px">
+      <table>
+        <thead>
+          <tr><th>年份</th><th>食用（口粮）</th><th>饲用</th><th>口粮+饲料合计</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2025</td><td>33.0%（约 2.75 亿吨）</td><td>46.3%（约 3.85 亿吨）</td><td class="avg">79.3%</td><td>报告回顾年</td></tr>
+          <tr><td>2026</td><td>约 2.73 亿吨（−0.5%）</td><td>约 3.84 亿吨（−0.3%）</td><td>—</td><td>总消费 8.30 亿吨；稳中有降</td></tr>
+          <tr><td>2030</td><td>—</td><td>约 3.90 亿吨</td><td>—</td><td>公开转述饲用量</td></tr>
+          <tr><td>2035</td><td>—</td><td>约 3.88 亿吨</td><td>—</td><td>饲用高位趋稳</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="source">
+      <strong>来源</strong> 农业农村部 / CAMES《中国农业展望报告（2026—2035）》粮食消费结构（含大豆）。
+      <a href="https://scs.moa.gov.cn/gzdt/202604/t20260429_6483787.htm" target="_blank" rel="noopener">发布稿</a>
+      · 勿与上方 FAO 口径三法预测直接等同。
+    </div>
+  </div>
 
   <div class="panel">
     <h2>三法合计占比与平均值（2024–2035）</h2>
