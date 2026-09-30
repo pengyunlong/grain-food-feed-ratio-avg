@@ -32,6 +32,10 @@
   .note,.source{margin-top:14px;color:var(--muted);font-size:.82rem;line-height:1.7}
   .source{border-top:1px solid var(--line);padding-top:12px}
   .source strong{color:#c5d0e0;font-weight:600}
+
+  .nav{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 8px}
+  .nav a{text-decoration:none;color:#8b9bb4;background:#243247;padding:7px 12px;border-radius:999px;font-size:.85rem;border:1px solid #2a3548}
+  .nav a.active,.nav a:hover{color:#e7ecf3;border-color:#5b9fd4;color:#9ec5e8}
   footer{margin-top:24px;color:var(--muted);font-size:.78rem}
   @media(max-width:900px){.kpi{grid-template-columns:1fr 1fr}.chart-box{height:300px}}
   @media(max-width:560px){.kpi{grid-template-columns:1fr}}
@@ -43,6 +47,10 @@
     <h1>口粮 + 饲料粮合计占总粮食消费比例</h1>
     <p class="sub">预测期 2024–2035 · 口径：FAO 中国大陆 Domestic supply（口粮=Food，饲料粮=Feed；合计=口粮+饲料粮）</p>
     <span class="badge">9.30 进展汇报 · 三法对比 + 等权平均</span>
+  <nav class="nav">
+    <a href="index.html" class="active">口粮·饲料粮合计占比</a>
+    <a href="cluster.html">省级经济聚类地图</a>
+  </nav>
   </header>
 
   <div class="kpi">
