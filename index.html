@@ -3,212 +3,111 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>口粮与饲料粮占比 · 三法平均 · 2024–2035</title>
+<title>口粮+饲料粮合计占总粮食消费比例 · 2024–2035</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0f1419;
-    --card: #1a2332;
-    --text: #e7ecf3;
-    --muted: #8b9bb4;
-    --food: #3d9a6a;
-    --feed: #d4a017;
-    --line: #2a3548;
-    --accent: #5b9fd4;
+    --bg:#0f1419; --card:#1a2332; --text:#e7ecf3; --muted:#8b9bb4;
+    --mlp:#5b9fd4; --logi:#3d9a6a; --poly:#d4a017; --line:#2a3548;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: radial-gradient(1200px 600px at 10% -10%, #1c2a3f 0%, var(--bg) 55%);
-    color: var(--text);
-    min-height: 100vh;
-  }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 64px; }
-  header h1 { margin: 0 0 8px; font-size: 1.65rem; font-weight: 650; letter-spacing: 0.02em; }
-  header p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 0.95rem; }
-  .badge {
-    display: inline-block; margin-top: 14px; padding: 4px 10px; border-radius: 999px;
-    background: #243247; color: var(--accent); font-size: 0.8rem;
-  }
-  .kpi {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0 22px;
-  }
-  .kpi .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 16px;
-  }
-  .kpi .label { color: var(--muted); font-size: 0.82rem; margin-bottom: 6px; }
-  .kpi .value { font-size: 1.55rem; font-weight: 700; }
-  .kpi .sub { color: var(--muted); font-size: 0.78rem; margin-top: 4px; }
-  .panel {
-    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
-    padding: 18px 18px 8px; margin-bottom: 18px;
-  }
-  .panel h2 { margin: 0 0 12px; font-size: 1.05rem; font-weight: 600; }
-  .chart-box { position: relative; height: 360px; }
-  table {
-    width: 100%; border-collapse: collapse; font-size: 0.88rem;
-  }
-  th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: right; }
-  th:first-child, td:first-child { text-align: left; }
-  th { color: var(--muted); font-weight: 560; }
-  tr:hover td { background: rgba(255,255,255,0.02); }
-  .note {
-    margin-top: 18px; color: var(--muted); font-size: 0.82rem; line-height: 1.65;
-  }
-  footer { margin-top: 28px; color: var(--muted); font-size: 0.78rem; }
-  @media (max-width: 720px) {
-    .kpi { grid-template-columns: 1fr; }
-    .chart-box { height: 280px; }
-  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:radial-gradient(1200px 600px at 10% -10%,#1c2a3f 0%,var(--bg) 55%);color:var(--text);min-height:100vh}
+  .wrap{max-width:1080px;margin:0 auto;padding:32px 20px 64px}
+  h1{margin:0 0 8px;font-size:1.55rem;font-weight:650}
+  .sub{color:var(--muted);line-height:1.6;font-size:.95rem;margin:0}
+  .badge{display:inline-block;margin-top:14px;padding:4px 10px;border-radius:999px;background:#243247;color:#9ec5e8;font-size:.8rem}
+  .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0 22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px}
+  .label{color:var(--muted);font-size:.82rem;margin-bottom:6px}
+  .value{font-size:1.7rem;font-weight:700}
+  .hint{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:18px}
+  .panel h2{margin:0 0 12px;font-size:1.05rem}
+  .chart-box{position:relative;height:380px}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--muted);font-weight:560}
+  .note{margin-top:14px;color:var(--muted);font-size:.82rem;line-height:1.65}
+  footer{margin-top:24px;color:var(--muted);font-size:.78rem}
+  @media(max-width:720px){.kpi{grid-template-columns:1fr}.chart-box{height:280px}}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>口粮与饲料粮占比预测（三法平均）</h1>
-      <p>样本期 2000–2023 · 预测期 2024–2035 · 口径：FAO 中国大陆 Domestic supply（口粮=Food，饲料粮=Feed）</p>
-      <span class="badge">9.30 进展汇报 · MLP + 逻辑斯谛 + 二次多项式 等权平均</span>
-    </header>
+<div class="wrap">
+  <header>
+    <h1>口粮 + 饲料粮合计占总粮食消费比例</h1>
+    <p class="sub">预测期 2024–2035 · 口径：FAO 中国大陆 Domestic supply（口粮=Food，饲料粮=Feed；合计=口粮+饲料粮）</p>
+    <span class="badge">9.30 进展汇报 · 三法对比（非平均）</span>
+  </header>
 
-    <div class="kpi">
-      <div class="card">
-        <div class="label">2035 口粮占比（平均）</div>
-        <div class="value" style="color:var(--food)" id="kpi-food">—</div>
-        <div class="sub">三法算术平均</div>
-      </div>
-      <div class="card">
-        <div class="label">2035 饲料粮占比（平均）</div>
-        <div class="value" style="color:var(--feed)" id="kpi-feed">—</div>
-        <div class="sub">三法算术平均</div>
-      </div>
-      <div class="card">
-        <div class="label">2035 合计占比</div>
-        <div class="value" id="kpi-total">—</div>
-        <div class="sub">口粮 + 饲料粮</div>
-      </div>
+  <div class="kpi">
+    <div class="card">
+      <div class="label">2035 · 逻辑斯谛</div>
+      <div class="value" style="color:var(--logi)" id="k-logi">—</div>
+      <div class="hint">约 72.5%</div>
     </div>
-
-    <div class="panel">
-      <h2>平均占比走势</h2>
-      <div class="chart-box"><canvas id="avgChart"></canvas></div>
+    <div class="card">
+      <div class="label">2035 · 二次多项式</div>
+      <div class="value" style="color:var(--poly)" id="k-poly">—</div>
+      <div class="hint">约 74.3%</div>
     </div>
-
-    <div class="panel">
-      <h2>三法对比（口粮 / 饲料粮）</h2>
-      <div class="chart-box"><canvas id="cmpChart"></canvas></div>
+    <div class="card">
+      <div class="label">2035 · MLP</div>
+      <div class="value" style="color:var(--mlp)" id="k-mlp">—</div>
+      <div class="hint">约 78.2%</div>
     </div>
-
-    <div class="panel">
-      <h2>年平均明细表</h2>
-      <div style="overflow-x:auto">
-        <table id="tbl">
-          <thead>
-            <tr>
-              <th>年份</th>
-              <th>口粮平均 %</th>
-              <th>饲料粮平均 %</th>
-              <th>合计 %</th>
-              <th>MLP 口粮</th>
-              <th>逻辑斯谛 口粮</th>
-              <th>多项式 口粮</th>
-              <th>MLP 饲料</th>
-              <th>逻辑斯谛 饲料</th>
-              <th>多项式 饲料</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <p class="note">
-        平均口径：对最近三次结果（MLP、逻辑斯谛 S 曲线、二次多项式）按年份分别对口粮占比、饲料粮占比取算术平均。
-        2035 三点：MLP 口粮 51.46% / 饲料 42.43%；逻辑斯谛 33.84% / 34.35%；二次多项式 26.26% / 47.99%。
-      </p>
-    </div>
-
-    <footer>生成于 2026-09-30 · 用于博士进展汇报前端展示</footer>
   </div>
-<script>
-const DATA = [{"year": 2024, "food": 40.2686, "feed": 34.5975, "total": 74.8661, "mlp_food": 41.153, "mlp_feed": 34.8618, "logi_food": 39.8612, "logi_feed": 34.2403, "poly_food": 39.7916, "poly_feed": 34.6903}, {"year": 2025, "food": 39.8994, "feed": 35.161, "total": 75.0604, "mlp_food": 41.887, "mlp_feed": 35.5948, "logi_food": 39.0463, "logi_feed": 34.3102, "poly_food": 38.7648, "poly_feed": 35.5781}, {"year": 2026, "food": 39.6072, "feed": 35.7314, "total": 75.3386, "mlp_food": 42.8475, "mlp_feed": 36.3279, "logi_food": 38.2765, "logi_feed": 34.3361, "poly_food": 37.6975, "poly_feed": 36.5302}, {"year": 2027, "food": 39.3187, "feed": 36.3177, "total": 75.6364, "mlp_food": 43.808, "mlp_feed": 37.061, "logi_food": 37.5587, "logi_feed": 34.3456, "poly_food": 36.5895, "poly_feed": 37.5465}, {"year": 2028, "food": 39.0356, "feed": 36.9234, "total": 75.959, "mlp_food": 44.7684, "mlp_feed": 37.7941, "logi_food": 36.8975, "logi_feed": 34.3491, "poly_food": 35.4409, "poly_feed": 38.627}, {"year": 2029, "food": 38.7586, "feed": 37.5434, "total": 76.302, "mlp_food": 45.7289, "mlp_feed": 38.508, "logi_food": 36.2952, "logi_feed": 34.3503, "poly_food": 34.2518, "poly_feed": 39.7718}, {"year": 2030, "food": 38.4879, "feed": 38.1619, "total": 76.6498, "mlp_food": 46.6894, "mlp_feed": 39.1542, "logi_food": 35.7522, "logi_feed": 34.3508, "poly_food": 33.022, "poly_feed": 40.9807}, {"year": 2031, "food": 38.2222, "feed": 38.8007, "total": 77.0229, "mlp_food": 47.6479, "mlp_feed": 39.7973, "logi_food": 35.267, "logi_feed": 34.3509, "poly_food": 31.7516, "poly_feed": 42.2539}, {"year": 2032, "food": 37.9597, "feed": 39.4609, "total": 77.4207, "mlp_food": 48.6015, "mlp_feed": 40.4405, "logi_food": 34.8371, "logi_feed": 34.351, "poly_food": 30.4406, "poly_feed": 43.5913}, {"year": 2033, "food": 37.701, "feed": 40.1425, "total": 77.8435, "mlp_food": 49.5551, "mlp_feed": 41.0836, "logi_food": 34.4589, "logi_feed": 34.351, "poly_food": 29.089, "poly_feed": 44.9929}, {"year": 2034, "food": 37.4446, "feed": 40.8535, "total": 78.2982, "mlp_food": 50.5087, "mlp_feed": 41.7508, "logi_food": 34.1284, "logi_feed": 34.351, "poly_food": 27.6968, "poly_feed": 46.4588}, {"year": 2035, "food": 37.1891, "feed": 41.5891, "total": 78.7783, "mlp_food": 51.4623, "mlp_feed": 42.4276, "logi_food": 33.8411, "logi_feed": 34.351, "poly_food": 26.264, "poly_feed": 47.9888}];
-const years = DATA.map(d => d.year);
-const last = DATA[DATA.length - 1];
-document.getElementById('kpi-food').textContent = last.food.toFixed(2) + '%';
-document.getElementById('kpi-feed').textContent = last.feed.toFixed(2) + '%';
-document.getElementById('kpi-total').textContent = last.total.toFixed(2) + '%';
 
-const tbody = document.querySelector('#tbl tbody');
+  <div class="panel">
+    <h2>三法合计占比走势（2024–2035）</h2>
+    <div class="chart-box"><canvas id="chart"></canvas></div>
+  </div>
+
+  <div class="panel">
+    <h2>分年明细（合计占总粮食消费 %）</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>年份</th><th>逻辑斯谛</th><th>二次多项式</th><th>MLP</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p class="note">2035 结果：逻辑斯谛约 72.5%，二次多项式约 74.3%，MLP 约 78.2%。表中为各年「口粮占比 + 饲料粮占比」合计。</p>
+  </div>
+  <footer>生成于 2026-09-30 · 博士进展汇报前端展示</footer>
+</div>
+<script>
+const DATA = [{"year": 2024, "mlp_total": 75.6222, "logi_total": 74.3012, "poly_total": 74.4818, "mlp_food": 41.153, "mlp_feed": 34.8618, "logi_food": 39.8612, "logi_feed": 34.2403, "poly_food": 39.7916, "poly_feed": 34.6903}, {"year": 2025, "mlp_total": 75.8615, "logi_total": 74.0882, "poly_total": 74.343, "mlp_food": 41.887, "mlp_feed": 35.5948, "logi_food": 39.0463, "logi_feed": 34.3102, "poly_food": 38.7648, "poly_feed": 35.5781}, {"year": 2026, "mlp_total": 76.1065, "logi_total": 73.8866, "poly_total": 74.2277, "mlp_food": 42.8475, "mlp_feed": 36.3279, "logi_food": 38.2765, "logi_feed": 34.3361, "poly_food": 37.6975, "poly_feed": 36.5302}, {"year": 2027, "mlp_total": 76.3537, "logi_total": 73.6961, "poly_total": 74.136, "mlp_food": 43.808, "mlp_feed": 37.061, "logi_food": 37.5587, "logi_feed": 34.3456, "poly_food": 36.5895, "poly_feed": 37.5465}, {"year": 2028, "mlp_total": 76.6008, "logi_total": 73.5158, "poly_total": 74.068, "mlp_food": 44.7684, "mlp_feed": 37.7941, "logi_food": 36.8975, "logi_feed": 34.3491, "poly_food": 35.4409, "poly_feed": 38.627}, {"year": 2029, "mlp_total": 76.8581, "logi_total": 73.3455, "poly_total": 74.0235, "mlp_food": 45.7289, "mlp_feed": 38.508, "logi_food": 36.2952, "logi_feed": 34.3503, "poly_food": 34.2518, "poly_feed": 39.7718}, {"year": 2030, "mlp_total": 77.0989, "logi_total": 73.1844, "poly_total": 74.0027, "mlp_food": 46.6894, "mlp_feed": 39.1542, "logi_food": 35.7522, "logi_feed": 34.3508, "poly_food": 33.022, "poly_feed": 40.9807}, {"year": 2031, "mlp_total": 77.3397, "logi_total": 73.0322, "poly_total": 74.0055, "mlp_food": 47.6479, "mlp_feed": 39.7973, "logi_food": 35.267, "logi_feed": 34.3509, "poly_food": 31.7516, "poly_feed": 42.2539}, {"year": 2032, "mlp_total": 77.5274, "logi_total": 72.8884, "poly_total": 74.0319, "mlp_food": 48.6015, "mlp_feed": 40.4405, "logi_food": 34.8371, "logi_feed": 34.351, "poly_food": 30.4406, "poly_feed": 43.5913}, {"year": 2033, "mlp_total": 77.7137, "logi_total": 72.7524, "poly_total": 74.0819, "mlp_food": 49.5551, "mlp_feed": 41.0836, "logi_food": 34.4589, "logi_feed": 34.351, "poly_food": 29.089, "poly_feed": 44.9929}, {"year": 2034, "mlp_total": 77.9245, "logi_total": 72.624, "poly_total": 74.1556, "mlp_food": 50.5087, "mlp_feed": 41.7508, "logi_food": 34.1284, "logi_feed": 34.351, "poly_food": 27.6968, "poly_feed": 46.4588}, {"year": 2035, "mlp_total": 78.1714, "logi_total": 72.5026, "poly_total": 74.2528, "mlp_food": 51.4623, "mlp_feed": 42.4276, "logi_food": 33.8411, "logi_feed": 34.351, "poly_food": 26.264, "poly_feed": 47.9888}];
+const last = DATA[DATA.length-1];
+document.getElementById('k-logi').textContent = last.logi_total.toFixed(1) + '%';
+document.getElementById('k-poly').textContent = last.poly_total.toFixed(1) + '%';
+document.getElementById('k-mlp').textContent = last.mlp_total.toFixed(1) + '%';
+const tb = document.getElementById('tbody');
 DATA.forEach(d => {
   const tr = document.createElement('tr');
-  tr.innerHTML = [
-    d.year,
-    d.food.toFixed(2),
-    d.feed.toFixed(2),
-    d.total.toFixed(2),
-    d.mlp_food.toFixed(2),
-    d.logi_food.toFixed(2),
-    d.poly_food.toFixed(2),
-    d.mlp_feed.toFixed(2),
-    d.logi_feed.toFixed(2),
-    d.poly_feed.toFixed(2),
-  ].map((v,i) => `<td>${v}</td>`).join('');
-  tbody.appendChild(tr);
+  tr.innerHTML = `<td>${d.year}</td><td>${d.logi_total.toFixed(2)}</td><td>${d.poly_total.toFixed(2)}</td><td>${d.mlp_total.toFixed(2)}</td>`;
+  tb.appendChild(tr);
 });
-
-const commonOpts = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: { labels: { color: '#c5d0e0' } },
-    tooltip: { mode: 'index', intersect: false }
+new Chart(document.getElementById('chart'), {
+  type: 'line',
+  data: {
+    labels: DATA.map(d => d.year),
+    datasets: [
+      { label: '逻辑斯谛', data: DATA.map(d => d.logi_total), borderColor: '#3d9a6a', backgroundColor: 'rgba(61,154,106,.12)', tension: .25, fill: false, pointRadius: 3 },
+      { label: '二次多项式', data: DATA.map(d => d.poly_total), borderColor: '#d4a017', backgroundColor: 'rgba(212,160,23,.12)', tension: .25, fill: false, pointRadius: 3 },
+      { label: 'MLP', data: DATA.map(d => d.mlp_total), borderColor: '#5b9fd4', backgroundColor: 'rgba(91,159,212,.12)', tension: .25, fill: false, pointRadius: 3 },
+    ]
   },
-  scales: {
-    x: { ticks: { color: '#8b9bb4' }, grid: { color: 'rgba(255,255,255,0.04)' } },
-    y: {
-      ticks: { color: '#8b9bb4', callback: v => v + '%' },
-      grid: { color: 'rgba(255,255,255,0.06)' },
-      title: { display: true, text: '占比 %', color: '#8b9bb4' }
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: '#c5d0e0' } }, tooltip: { mode: 'index', intersect: false } },
+    scales: {
+      x: { ticks: { color: '#8b9bb4' }, grid: { color: 'rgba(255,255,255,.04)' } },
+      y: { ticks: { color: '#8b9bb4', callback: v => v + '%' }, grid: { color: 'rgba(255,255,255,.06)' }, title: { display: true, text: '合计占比 %', color: '#8b9bb4' }, suggestedMin: 70, suggestedMax: 80 }
     }
   }
-};
-
-new Chart(document.getElementById('avgChart'), {
-  type: 'line',
-  data: {
-    labels: years,
-    datasets: [
-      {
-        label: '口粮占比（三法平均）',
-        data: DATA.map(d => d.food),
-        borderColor: '#3d9a6a',
-        backgroundColor: 'rgba(61,154,106,0.15)',
-        tension: 0.25, fill: true, pointRadius: 3
-      },
-      {
-        label: '饲料粮占比（三法平均）',
-        data: DATA.map(d => d.feed),
-        borderColor: '#d4a017',
-        backgroundColor: 'rgba(212,160,23,0.12)',
-        tension: 0.25, fill: true, pointRadius: 3
-      }
-    ]
-  },
-  options: commonOpts
-});
-
-new Chart(document.getElementById('cmpChart'), {
-  type: 'line',
-  data: {
-    labels: years,
-    datasets: [
-      { label: 'MLP·口粮', data: DATA.map(d => d.mlp_food), borderColor: '#5b9fd4', borderDash: [4,3], tension: 0.2, pointRadius: 0 },
-      { label: '逻辑斯谛·口粮', data: DATA.map(d => d.logi_food), borderColor: '#7ec8a3', borderDash: [4,3], tension: 0.2, pointRadius: 0 },
-      { label: '多项式·口粮', data: DATA.map(d => d.poly_food), borderColor: '#9ad0ff', borderDash: [4,3], tension: 0.2, pointRadius: 0 },
-      { label: 'MLP·饲料', data: DATA.map(d => d.mlp_feed), borderColor: '#e0b84a', tension: 0.2, pointRadius: 0 },
-      { label: '逻辑斯谛·饲料', data: DATA.map(d => d.logi_feed), borderColor: '#c98a2c', tension: 0.2, pointRadius: 0 },
-      { label: '多项式·饲料', data: DATA.map(d => d.poly_feed), borderColor: '#f0c978', tension: 0.2, pointRadius: 0 },
-    ]
-  },
-  options: commonOpts
 });
 </script>
 </body>
